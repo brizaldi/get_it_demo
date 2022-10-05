@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get_it_demo/src/settings/application/settings_cubit.dart';
-import 'package:get_it_demo/src/settings/service/settings_service.dart';
 
+import '../service_locator.dart';
 import 'sample_feature/details/presentation/sample_item_details_page.dart';
 import 'sample_feature/list/presentation/sample_item_list_page.dart';
+import 'settings/application/settings_cubit.dart';
 import 'settings/presentation/settings_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SettingsCubit(SettingsService())..loadSettings(),
+          create: (context) => sl.get<SettingsCubit>()..loadSettings(),
         ),
       ],
       child: BlocBuilder<SettingsCubit, ThemeMode>(

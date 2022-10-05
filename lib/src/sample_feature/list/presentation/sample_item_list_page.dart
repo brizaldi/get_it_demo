@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../service_locator.dart';
 import '../../../settings/presentation/settings_page.dart';
 import '../../core/model/sample_item.dart';
-import '../../core/service/sample_service.dart';
 import '../application/sample_list_cubit.dart';
 import 'sample_item_list_body.dart';
 
@@ -17,7 +17,7 @@ class SampleItemListPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SampleListCubit(SampleService())..fetch(),
+          create: (context) => sl.get<SampleListCubit>()..fetch(),
         ),
       ],
       child: Scaffold(
